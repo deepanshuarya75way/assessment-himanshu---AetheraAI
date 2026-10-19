@@ -629,8 +629,27 @@ function ConversationalChat() {
                   ) : (
                     <>
                       <ExpandableMarkdown allowCollapse={false}>{msg.content}</ExpandableMarkdown>
-                      {msg.isStreaming && <span className="ws-streaming-cursor" />}
-                    </>
+                      {!msg.isStreaming && (
+                        <div className="ws-ai-explanation">
+                           <strong> Why this answer?</strong>
+                           <p>
+                            This answer is generated from the model's knowledge
+                            {!msg.metadata?.chunks?.length
+                             ? ".No retrieved document sources are attached."
+                             : "and retrieved document context."}
+                             {" "}Verify important claims before relying on them.
+                            </p>
+                          <span>
+                            Evidence type:{" "}
+                            {msg.metadata?.chunks?.length
+                            ?"Retrieved context + AI-generated response"
+                            : "AI-generated response"}
+                          </span>
+                        </div>
+                      )}
+                      {msg.isStreaming &&
+                       <span className="ws-streaming-cursor" />}
+                    </> 
                   )}
 
                   {/* Styled Inline Sources Option */}
@@ -652,13 +671,7 @@ function ConversationalChat() {
 
                       return (
                         <div className="ws-citations-inline">
-                        <div className="ws-ai-explanation">
-                          <strong> Why this answer? </strong>
-                           <p>
-                             This response is generated using the available context and the model's knowledge. Verify important claims against the cited sources.
-                             </p>
-                             <span>Evidence type: AI -generated response </span>
-                        </div>
+                        
                           <span className="ws-citations-label">📖 Answer based on:</span>
                           <div className="ws-citations-list-wrap">
                             {uniqueSources.map((src, sIdx) => {

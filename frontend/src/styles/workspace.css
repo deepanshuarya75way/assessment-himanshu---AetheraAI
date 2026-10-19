@@ -6022,5 +6022,27 @@ input:checked + .ws-slider:before {
 }
 
 
+.ws-ai-explanation {
+  margin-bottom: 12 px;
+  padding: 12px;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #d1d5db;
+}
 
+.ws-ai-explanation strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #ffffff
+}
+
+.ws-ai-explanation p {
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.ws-ai-explanation span {
+  color: #9ca3af;
+}
 
